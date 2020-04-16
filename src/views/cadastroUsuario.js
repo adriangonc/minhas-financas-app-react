@@ -40,7 +40,6 @@ class CadastroUsuario extends React.Component{
                             className="form-control" 
                             name="email" 
                             onChange={e => this.setState({email : e.target.value})}/>
-
                 </FormGroup>
 
                 <FormGroup label="Senha: *" htmlFor="inputSenha">
@@ -49,7 +48,6 @@ class CadastroUsuario extends React.Component{
                             className="form-control" 
                             name="senha" 
                             onChange={e => this.setState({senha : e.target.value})}/>
-
                 </FormGroup>
 
                 <FormGroup label="Repita a Senha: *" htmlFor="inputRepitaSenha">
@@ -58,7 +56,6 @@ class CadastroUsuario extends React.Component{
                             className="form-control" 
                             name="senhaRepeticao" 
                             onChange={e => this.setState({senhaRepeticao : e.target.value})}/>
-
                 </FormGroup>
 
                 <button type="button" onClick={this.cadastrar} className="btn btn-success">Salvar</button>
