@@ -12,7 +12,7 @@ class Login extends React.Component{
         mensagemErro: null
     }
 
-    entrar = () => {
+    entrar = async () => {
         axios
         .post('http://localhost:8080/api/usuarios/autenticar', {
             email: this.state.email,
@@ -22,6 +22,7 @@ class Login extends React.Component{
         }).catch( error => {
             this.setState({mensagemErro: error.response.data})
         })
+        console.log('requidição finalizada!')
     }
 
     prepararCadastrar = () => {
