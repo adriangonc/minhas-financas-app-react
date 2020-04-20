@@ -8,7 +8,8 @@ class Login extends React.Component{
 
     state = {
         email : '',
-        senha : ''
+        senha : '',
+        mensagemErro: null
     }
 
     entrar = () => {
@@ -17,9 +18,9 @@ class Login extends React.Component{
             email: this.state.email,
             senha: this.state.senha
         }).then( response => {
-            console.log(response)
+            this.props.history.push('/home')
         }).catch( error => {
-            console.log(error.response)
+            this.setState({mensagemErro: error.response.data})
         })
     }
 
@@ -34,6 +35,9 @@ class Login extends React.Component{
                     <div className="col-md-6" style={ {position : 'relative', left : '300px'} }>
                         <div className="bs-docs-section">
                             <Card title="Login">
+                                <div className="rew">
+                                    <span>{this.state.mensagemErro}</span>
+                                </div>
                                 <div className="row">
                                     <div className="col-lg-12">
                                         <div className="bs-component">
