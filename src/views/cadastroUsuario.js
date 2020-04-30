@@ -2,6 +2,8 @@ import React from 'react'
 import Card from '../components/card'
 import FormGroup from '../components/form-group'
 import { withRouter } from 'react-router-dom'
+import UsuarioService from '../app/service/usuarioService'
+import {mensagemSucesso, mensagemErro} from '../components/toastr'
 
 class CadastroUsuario extends React.Component{
 
@@ -12,8 +14,24 @@ class CadastroUsuario extends React.Component{
         senhaRepeticao : ''
     }
 
+    constructor(){
+        super()
+        this.service = new UsuarioService();
+    }
+
     cadastrar = () => {
-        console.log(this.state)
+        const usuario = {
+            nome: this.state.nome,
+            email: this.state.email,
+            senha: this.state.senha
+        }
+
+        this.service.salvarUsuario(usuario).then( response => {
+            mensagemSucesso('Usuário cadastrado com sucesso! Faça login para entrar!')
+            this.props.history.push('/login')
+        }).catch(error => {
+            mensagemErro(error.response.data)
+        })
     }
 
     cancelarLogin = () => {
