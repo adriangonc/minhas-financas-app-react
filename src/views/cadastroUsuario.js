@@ -28,7 +28,7 @@ class CadastroUsuario extends React.Component{
 
         if(!this.state.email){
             mensagens.push('O Email e obrigatório!')
-        } else if( !this.state.email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/) ){
+        } else if( !this.state.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/) ){
             mensagens.push('Informe um e-mail válido!')
         }
 
