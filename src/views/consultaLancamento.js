@@ -22,6 +22,12 @@ class ConsultaLancamentos extends React.Component{
             {label: 'Dezembro', value: '12'}
         ]
 
+        const listaTipos = [
+            {label: 'Selecione...', value: ''},
+            {label: 'Despesa', value: 'DESPESA'},
+            {label: 'Receita', value: 'RECEITA'}
+        ]
+
         return(
             <Card title="Consulta Lançamentos">
                 <div className="row">
@@ -29,7 +35,7 @@ class ConsultaLancamentos extends React.Component{
                         <div className="bs-component">
                         <FormGroup htmlFor="inputAno" label="Ano: *">
                             <input type="text" 
-                                class="form-control" id="exampleInputEmail1"
+                                className="form-control" id="exampleInputEmail1"
                                 aria-describedby="emailHelp"
                                 placeholder="Insira o ano">
                             </input>
@@ -37,11 +43,15 @@ class ConsultaLancamentos extends React.Component{
                         </FormGroup>
 
                         <FormGroup htmlFor="inputMes" label="Mês:">
-                            <SelectMenu className="form-control" lista={listaMes}>
-
+                            <SelectMenu id="iptMes" className="form-control" lista={listaMes}>
                             </SelectMenu>
-
                         </FormGroup>
+
+                        <FormGroup htmlFor="inputTipo" label="Tipo:">
+                            <SelectMenu id="iptTipo" className="form-control" lista={listaTipos}>
+                            </SelectMenu>
+                        </FormGroup>
+
                         </div>
                     </div>
                 </div>
