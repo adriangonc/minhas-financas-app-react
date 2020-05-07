@@ -6,6 +6,17 @@ import SelectMenu from '../../components/selectMenu'
 import LacamentosTable from './lancamentosTable'
 
 class ConsultaLancamentos extends React.Component{
+
+    state = {
+        ano: '', 
+        mes: '', 
+        tipo: ''
+    }
+
+    buscarLancamento = () => {
+        console.log(this.state)
+    }
+
     render(){
         const listaMes = [
             {label: 'Selecione...', value: ''},
@@ -40,24 +51,34 @@ class ConsultaLancamentos extends React.Component{
                         <div className="bs-component">
                         <FormGroup htmlFor="inputAno" label="Ano: *">
                             <input type="text" 
-                                className="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp"
+                                className="form-control" 
+                                id="inputAno"
+                                value={this.state.ano}
+                                onChange={e => this.setState({ano: e.target.value})}
                                 placeholder="Insira o ano">
                             </input>
 
                         </FormGroup>
 
                         <FormGroup htmlFor="inputMes" label="Mês:">
-                            <SelectMenu id="iptMes" className="form-control" lista={listaMes}>
+                            <SelectMenu id="iptMes" 
+                                className="form-control" 
+                                value={this.state.mes}
+                                onChange={e => this.setState({mes: e.target.value})}
+                                lista={listaMes}>
                             </SelectMenu>
                         </FormGroup>
 
                         <FormGroup htmlFor="inputTipo" label="Tipo:">
-                            <SelectMenu id="iptTipo" className="form-control" lista={listaTipos}>
+                            <SelectMenu id="iptTipo" 
+                            className="form-control" 
+                            value={this.state.tipo}
+                            onChange={e => this.setState({tipo: e.target.value})}
+                            lista={listaTipos}>
                             </SelectMenu>
                         </FormGroup>
 
-                        <button type="button" className="btn btn-success">Buscar</button>
+                        <button type="button" onClick={this.buscarLancamento} className="btn btn-success">Buscar</button>
                         <button type="button" className="btn btn-danger">Cadastrar</button>
 
                         </div>
