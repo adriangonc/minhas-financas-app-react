@@ -1,8 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import Card from '../components/card'
-import FormGroup from '../components/form-group'
-import SelectMenu from '../components/selectMenu'
+import Card from '../../components/card'
+import FormGroup from '../../components/form-group'
+import SelectMenu from '../../components/selectMenu'
+import LacamentosTable from './lancamentosTable'
 
 class ConsultaLancamentos extends React.Component{
     render(){
@@ -26,6 +27,10 @@ class ConsultaLancamentos extends React.Component{
             {label: 'Selecione...', value: ''},
             {label: 'Despesa', value: 'DESPESA'},
             {label: 'Receita', value: 'RECEITA'}
+        ]
+
+        const lancamentos = [
+            { id: 1, descricao: 'Salário', valor: 5000, mes: 4, tipo: 'Receita', status: 'Efetivado'}
         ]
 
         return(
@@ -52,6 +57,17 @@ class ConsultaLancamentos extends React.Component{
                             </SelectMenu>
                         </FormGroup>
 
+                        <button type="button" className="btn btn-success">Buscar</button>
+                        <button type="button" className="btn btn-danger">Cadastrar</button>
+
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="bs-component">
+                            <LacamentosTable lancamentos={lancamentos}/>
                         </div>
                     </div>
                 </div>
