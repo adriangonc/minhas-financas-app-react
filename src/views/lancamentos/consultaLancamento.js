@@ -6,6 +6,7 @@ import SelectMenu from '../../components/selectMenu'
 import LacamentosTable from './lancamentosTable'
 import LancamentoService from '../../app/service/lancamentoService'
 import LocalStorageService from '../../app/service/localstorageService'
+import * as messages from '../../components/toastr'
 
 class ConsultaLancamentos extends React.Component{
 
@@ -13,6 +14,7 @@ class ConsultaLancamentos extends React.Component{
         ano: '', 
         mes: '', 
         tipo: '',
+        descricao: '',
         lancamentos: []
     }
     
@@ -22,12 +24,18 @@ class ConsultaLancamentos extends React.Component{
     }
 
     buscarLancamento = () => {
+        if(!this.state.ano){
+            messages.mensagemErro('Você deve inserir um ano para buscar!')
+            return false;
+        }
+
         const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
 
         const lancamentoFiltro = {
             ano: this.state.ano,
             mes: this.state.mes,
             tipo: this.state.tipo,
+            descricao: this.state.descricao,
             usuario: usuarioLogado.id
         }
 
@@ -40,31 +48,9 @@ class ConsultaLancamentos extends React.Component{
     }
 
     render(){
-        const listaMes = [
-            {label: 'Selecione...', value: ''},
-            {label: 'Janeiro', value: '1'},
-            {label: 'Fevereiro', value: '2'},
-            {label: 'Março', value: '3'},
-            {label: 'Abril', value: '4'},
-            {label: 'Maio', value: '5'},
-            {label: 'Junho', value: '6'},
-            {label: 'Julho', value: '7'},
-            {label: 'Agosto', value: '8'},
-            {label: 'Setembro', value: '9'},
-            {label: 'Outubro', value: '10'},
-            {label: 'Novembro', value: '11'},
-            {label: 'Dezembro', value: '12'}
-        ]
+        const listaMes = this.service.obterMeses()
 
-        const listaTipos = [
-            {label: 'Selecione...', value: ''},
-            {label: 'Despesa', value: 'DESPESA'},
-            {label: 'Receita', value: 'RECEITA'}
-        ]
-
-        const lancamentos = [
-            { id: 1, descricao: 'Salário', valor: 5000, mes: 4, tipo: 'Receita', status: 'Efetivado'}
-        ]
+        const listaTipos = this.service.obterTipos()
 
         return(
             <Card title="Consulta Lançamentos">
@@ -72,11 +58,11 @@ class ConsultaLancamentos extends React.Component{
                     <div className="col-md-6">
                         <div className="bs-component">
                         <FormGroup htmlFor="inputAno" label="Ano: *">
-                            <input type="text" 
+                            <input type="number" 
                                 className="form-control" 
                                 id="inputAno"
                                 value={this.state.ano}
-                                onChange={e => this.setState({ano: e.target.value})}
+                                onChange={e => this.setState({ano: e.target.value}) } 
                                 placeholder="Insira o ano">
                             </input>
 
@@ -91,6 +77,16 @@ class ConsultaLancamentos extends React.Component{
                             </SelectMenu>
                         </FormGroup>
 
+                        <FormGroup htmlFor="inputDesc" label="Descrição:">
+                        <input type="text" 
+                                className="form-control" 
+                                id="inputDesc"
+                                value={this.state.descricao}
+                                onChange={e => this.setState({descricao: e.target.value})}
+                                placeholder="Insira a descrição">
+                            </input>
+                        </FormGroup>
+
                         <FormGroup htmlFor="inputTipo" label="Tipo:">
                             <SelectMenu id="iptTipo" 
                             className="form-control" 
@@ -100,7 +96,7 @@ class ConsultaLancamentos extends React.Component{
                             </SelectMenu>
                         </FormGroup>
 
-                        <button type="button" onClick={this.buscarLancamento} className="btn btn-success">Buscar</button>
+                        <button disabled={!this.state.ano} type="button" onClick={this.buscarLancamento} className="btn btn-success">Buscar</button>
                         <button type="button" className="btn btn-danger">Cadastrar</button>
 
                         </div>
