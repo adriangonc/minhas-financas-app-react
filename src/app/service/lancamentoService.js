@@ -2,10 +2,10 @@ import ApiService from '../apiservice'
 
 export default class LancamentoService extends ApiService {
     constructor(){
-        super( '/api/lancamento')
+        super( '/api/lancamentos')
     }
 
-    consultar(LancamentoFiltro){
+    consultar(lancamentoFiltro){
         let params = `?ano=${lancamentoFiltro.ano}`
 
         if(lancamentoFiltro.mes){
@@ -18,6 +18,10 @@ export default class LancamentoService extends ApiService {
 
         if(lancamentoFiltro.status){
             params = `${params}&status=${lancamentoFiltro.status}`
+        }
+
+        if(lancamentoFiltro.usuario != null){
+            params = `${params}&usuario=${lancamentoFiltro.usuario}`
         }
 
         return this.get(params)

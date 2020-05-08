@@ -4,17 +4,39 @@ import Card from '../../components/card'
 import FormGroup from '../../components/form-group'
 import SelectMenu from '../../components/selectMenu'
 import LacamentosTable from './lancamentosTable'
+import LancamentoService from '../../app/service/lancamentoService'
+import LocalStorageService from '../../app/service/localstorageService'
 
 class ConsultaLancamentos extends React.Component{
 
     state = {
         ano: '', 
         mes: '', 
-        tipo: ''
+        tipo: '',
+        lancamentos: []
+    }
+    
+    constructor(){
+        super();
+        this.service = new LancamentoService();
     }
 
     buscarLancamento = () => {
-        console.log(this.state)
+        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
+
+        const lancamentoFiltro = {
+            ano: this.state.ano,
+            mes: this.state.mes,
+            tipo: this.state.tipo,
+            usuario: usuarioLogado.id
+        }
+
+        this.service.consultar(lancamentoFiltro)
+        .then( res => {
+            this.setState( { lancamentos: res.data } )
+        }).catch( error => {
+            console.log(error)
+        } )
     }
 
     render(){
@@ -88,7 +110,7 @@ class ConsultaLancamentos extends React.Component{
                 <div className="row">
                     <div className="col-md-12">
                         <div className="bs-component">
-                            <LacamentosTable lancamentos={lancamentos}/>
+                            <LacamentosTable lancamentos={this.state.lancamentos}/>
                         </div>
                     </div>
                 </div>
