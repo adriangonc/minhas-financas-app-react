@@ -20,12 +20,14 @@ class ConsultaLancamentos extends React.Component{
         descricao: '',
         lancamentos: [],
         showConfirmDialog: false,
-        lancamentoDeletar: {}
+        lancamentoDeletar: {},
+        anoAtual: new Date()
     }
     
     constructor(){
         super();
         this.service = new LancamentoService();
+        this.state.ano = this.state.anoAtual.getFullYear();
     }
 
     buscarLancamento = () => {
