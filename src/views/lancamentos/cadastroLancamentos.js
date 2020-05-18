@@ -4,6 +4,8 @@ import Card from '../../components/card'
 import FormGroup from '../../components/form-group'
 import SelectMenu from '../../components/selectMenu'
 import LancamentoService from '../../app/service/lancamentoService'
+import * as messages from '../../components/toastr'
+import LocalStorageService from '../../app/service/localstorageService'
 
 class CadastroLancamentos extends React.Component {
 
@@ -11,9 +13,9 @@ class CadastroLancamentos extends React.Component {
         id: null,
         descricao: '',
         valor: '',
-        mes: '',
+        mes: null,
         ano: '',
-        tipo: '',
+        tipo: null,
         status: ''
     }
 
@@ -23,10 +25,31 @@ class CadastroLancamentos extends React.Component {
     }
 
     submit = () => {
-        console.log(this.state)
+        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
+
+        const { descricao, valor, ano } = this.state
+        const mes = this.state.mes
+        const tipo = this.state.tipo
+
+        const lancamento = { descricao, valor, mes, ano, tipo, usuario: usuarioLogado.id }
+
+        this.service.salvar(lancamento).then( response => {
+            messages.mensagemSucesso('Lançamentos salvo com sucesso!')
+        }).catch( error => {
+            messages.mensagemErro(error.response.data)
+        })
+
+        console.log(lancamento, this.state.mes, tipo)
     }
 
     handleChange = (event) => {
+        const value = event.target.value
+        const name = event.target.name
+
+        this.setState({ [name]: value })
+    }
+
+    handleChangeSelect = (event) => {
         const value = event.target.value
         const name = event.target.name
 
@@ -66,8 +89,8 @@ class CadastroLancamentos extends React.Component {
                     <div className="col-md-6">
                         <FormGroup id="selectMes" label="Mês: *"> 
                             <SelectMenu id="selectMes" 
+                                        name="mes" 
                                         value={this.state.mes}
-                                        name="mes"
                                         onChange={this.handleChange}
                                         lista={meses} 
                                         className="form-control"/>
@@ -89,9 +112,9 @@ class CadastroLancamentos extends React.Component {
 
                     <div className="col-md-4">
                         <FormGroup id="selectTipo" label="Tipo: *">
-                            <SelectMenu id="selectTipos" 
-                                        name="tipo"
+                            <SelectMenu id="selectTipos"                                         
                                         value={this.state.tipo}
+                                        name="tipo"
                                         onChange={this.handleChange}
                                         lista={tipos} 
                                         className="form-control"/>
@@ -101,8 +124,8 @@ class CadastroLancamentos extends React.Component {
                     <div className="col-md-4">
                         <FormGroup id="selectStatus" label="Status:">
                             <input  type="text" 
-                                    name="status"
                                     value={this.state.status}
+                                    name="status"
                                     className="form-control" 
                                     disabled={true} />
                         </FormGroup>
