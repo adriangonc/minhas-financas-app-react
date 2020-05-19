@@ -28,6 +28,7 @@ class ConsultaLancamentos extends React.Component{
         super();
         this.service = new LancamentoService();
         this.state.ano = this.state.anoAtual.getFullYear();
+        this.buscarLancamento();
     }
 
     buscarLancamento = () => {
@@ -78,6 +79,10 @@ class ConsultaLancamentos extends React.Component{
     cancelarDelecao = () => {
         this.setState({ showConfirmDialog : false, lancamentoDeletar: {} })
 
+    }
+
+    preparaFormularioCadastro = () => {
+        this.props.history.push('/cadastro-lancamentos')
     }
 
     render(){
@@ -137,7 +142,7 @@ class ConsultaLancamentos extends React.Component{
                         </FormGroup>
 
                         <button disabled={!this.state.ano} type="button" onClick={this.buscarLancamento} className="btn btn-success">Buscar</button>
-                        <button type="button" className="btn btn-danger">Cadastrar</button>
+                        <button type="button" className="btn btn-danger" onClick={this.preparaFormularioCadastro}>Cadastrar</button>
 
                         </div>
                     </div>
