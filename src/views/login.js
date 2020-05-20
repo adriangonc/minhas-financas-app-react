@@ -52,7 +52,8 @@ class Login extends React.Component{
                                                     onChange={e => this.setState({email: e.target.value})}
                                                     className="form-control" 
                                                     id="exampleInputEmail1" 
-                                                    aria-describedby="emailHelp" placeholder="Digite o Email">
+                                                    aria-describedby="emailHelp" 
+                                                    placeholder="Digite o Email">
 
                                                     </input>
                                                 </FormGroup>
