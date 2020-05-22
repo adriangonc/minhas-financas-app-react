@@ -38,6 +38,10 @@ export default class LancamentoService extends ApiService {
         return this.post('/', lancamento)
     }
 
+    atualizar(lancamento){
+        return this.put(`/${lancamento.id}`, lancamento);
+    }
+
     consultar(lancamentoFiltro){
         let params = `?ano=${lancamentoFiltro.ano}`
 
