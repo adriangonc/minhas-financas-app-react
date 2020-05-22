@@ -5,6 +5,10 @@ export default class LancamentoService extends ApiService {
         super( '/api/lancamentos')
     }
 
+    obterPorId(id){
+        return this.get(`/${id}`);
+    }
+
     obterMeses(){
         return [    
             {label: 'Selecione...', value: ''},

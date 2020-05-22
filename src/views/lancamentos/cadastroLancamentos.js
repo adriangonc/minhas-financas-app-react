@@ -16,12 +16,26 @@ class CadastroLancamentos extends React.Component {
         mes: null,
         ano: '',
         tipo: null,
-        status: ''
+        status: '',
+        usuario: null
     }
 
     constructor(){
         super()
         this.service =  new LancamentoService()
+    }
+
+    componentDidMount(){
+        const params = this.props.match.params
+        if(params.id){
+            this.service.obterPorId(params.id)
+                .then( response => {
+                    this.setState( {...response.data} ) //O operador '...' espara as propriedades do .data. Funciona pois o método do backend retorna as mesmas propriedades do setState.
+                } ).catch( erros => {
+                    messages.mensagemErro(erros.response.data)
+                })
+        }
+        console.log(params.id)
     }
 
     submit = () => {
