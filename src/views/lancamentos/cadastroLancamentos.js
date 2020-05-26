@@ -17,7 +17,8 @@ class CadastroLancamentos extends React.Component {
         ano: '',
         tipo: null,
         status: '',
-        usuario: null
+        usuario: null,
+        atualizando: false
     }
 
     constructor(){
@@ -30,7 +31,7 @@ class CadastroLancamentos extends React.Component {
         if(params.id){
             this.service.obterPorId(params.id)
                 .then( response => {
-                    this.setState( {...response.data} ) //O operador '...' espara as propriedades do .data. Funciona pois o método do backend retorna as mesmas propriedades do setState.
+                    this.setState( {...response.data, atualizando: true} ) //O operador '...' espara as propriedades do .data. Funciona pois o método do backend retorna as mesmas propriedades do setState.
                 } ).catch( erros => {
                     messages.mensagemErro(erros.response.data)
                 })
@@ -40,12 +41,19 @@ class CadastroLancamentos extends React.Component {
 
     submit = () => {
         const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
-
         const { descricao, valor, ano } = this.state
         const mes = this.state.mes
         const tipo = this.state.tipo
 
         const lancamento = { descricao, valor, mes, ano, tipo, usuario: usuarioLogado.id }
+
+        try{
+            this.service.validar(lancamento)
+        }catch(erro){
+            const mensagemErro = erro.mensagens;
+            mensagemErro.forEach(msg => messages.mensagemErro(msg));
+            return false;    
+        }
 
         this.service.salvar(lancamento).then( response => {
             this.props.history.push('/consulta-lancamentos')
@@ -91,7 +99,7 @@ class CadastroLancamentos extends React.Component {
         const meses = this.service.obterMeses()
 
         return(
-            <Card title="Cadastro de lançamentos">
+            <Card title={this.state.atualizando ? 'Atualização de lançamentos' : 'Cadastro de lançamentos'}>
                 <div>
                     <div className="col-md-12">
                     <FormGroup id="inputDescricao" label="Descrição: *">
@@ -163,8 +171,13 @@ class CadastroLancamentos extends React.Component {
             
             <div className="row">
                 <div className="col-md-6">
-                    <button onClick={this.submit} className="btn btn-success">Salvar</button>
-                    <button onClick={this.atualizar} className="btn btn-primary">Atualizar</button>
+                    {this.state.atualizando ?
+                    (
+                        <button onClick={this.atualizar} className="btn btn-primary">Atualizar</button>
+                    ) : (
+                        <button onClick={this.submit} className="btn btn-success">Salvar</button>
+                    )
+                    }             
                     <button onClick={ e => this.props.history.push('/consulta-lancamentos') } className="btn btn-danger">Cancelar</button>
                 </div>
             </div>
