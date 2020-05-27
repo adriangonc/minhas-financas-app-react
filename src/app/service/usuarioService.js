@@ -1,4 +1,5 @@
 import ApiService from '../apiservice'
+import ErroValidacao from '../exception/ErroValidacao'
 
 class UsuarioService extends ApiService{
 
@@ -16,6 +17,30 @@ class UsuarioService extends ApiService{
 
     salvarUsuario(usuario){
         return this.post('/', usuario)
+    }
+
+    validar(usuario){
+        const erros = []
+
+        if(!usuario.nome){
+            erros.push('O campo Nome é obrigatório!')
+        }
+
+        if(!usuario.email){
+            erros.push('O E-mail de cadastro e obrigatório!')
+        } else if( !usuario.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/) ){
+            erros.push('Informe um e-mail válido!')
+        }
+
+        if(!usuario.senha || !usuario.senhaRepeticao){
+            erros.push('Digite a mesma senha duas vezez!')
+        } else if(usuario.senha !== usuario.senhaRepeticao){
+            erros.push('As senhas digitadas não são iguais!')
+        }
+
+        if(erros && erros.length > 0){
+            throw new ErroValidacao(erros)
+        }
     }
 
 }
