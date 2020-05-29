@@ -85,6 +85,21 @@ class ConsultaLancamentos extends React.Component{
         this.props.history.push('/cadastro-lancamentos')
     }
 
+    alterarStatusLancamento = (lancamento, status) => {
+        this.service.alterarStatusLancamento(lancamento.id, status)
+        .then( response => {
+            const lancamentos = this.state.lancamentos
+            const index = lancamentos.indexOf(lancamento)
+
+            if(index !== -1){ //Se objeto não for encontrado no array o index of retorna -1
+                lancamento['status'] = status
+                lancamentos[index] = lancamento
+                this.setState({lancamento})
+            }
+            messages.mensagemSucesso("Status atualizado com sucesso!")
+        })
+    }
+
     render(){
         const listaMes = this.service.obterMeses()
 
@@ -153,7 +168,8 @@ class ConsultaLancamentos extends React.Component{
                         <div className="bs-component">
                             <LacamentosTable lancamentos={this.state.lancamentos}
                                             deleteAction={this.abrirConfirmacao}
-                                            editAction={this.editarLancamento} />
+                                            editAction={this.editarLancamento}
+                                            alterarStatusLancamento={this.alterarStatusLancamento} />
                         </div>
                     </div>
                 </div>
