@@ -51,7 +51,7 @@ class ConsultaLancamentos extends React.Component{
         .then( res => {
             const lista = res.data
 
-            if(lista.length == 0){
+            if(lista.length === 0){
                 messages.mensagemAlerta("Nenhum resultado encontrado!")
             }
             this.setState( { lancamentos: lista } )
