@@ -3,6 +3,8 @@ import React from 'react';
 import '../custom.css'
 import Rotas from './rotas'
 import Navbar from '../components/navbar'
+import ProvedorAutenticacao from './provedorAutenticacao'
+
 import 'toastr/build/toastr.min.js'
 
 import 'toastr/build/toastr.css'
@@ -14,18 +16,16 @@ import 'primeicons/primeicons.css'
 
 class App extends React.Component {
 
-  render(){
-    return(
-      <>
-        <Navbar></Navbar>
-        <div className="container">
-          <Rotas></Rotas>
+  render() {
+
+    return (
+      <ProvedorAutenticacao>
+        <Navbar />
+        <div>
+          <Rotas />
         </div>
-      </>
+      </ProvedorAutenticacao>
     )
   }
-
 }
-
-
 export default App;

@@ -1,4 +1,4 @@
-import LocalStorageService from './localstorageService'
+import LocalStorageService from '../service/localstorageService'
 
 export const USUARIO_LOGADO = '_usuario_logado'
 
@@ -6,18 +6,18 @@ export default class AuthService {
 
     static isUsuarioAutenticado(){
         const usuario = LocalStorageService.obterItem(USUARIO_LOGADO)
-        return usuario && usuario.id;
+        return usuario && usuario.id
     }
 
     static removerUsuarioAutenticado(){
         LocalStorageService.removerItem(USUARIO_LOGADO)
     }
 
-    logar(usuario){
+    static logar(usuario){
         LocalStorageService.adicionarItem(USUARIO_LOGADO, usuario)
     }
 
-    obterUsuarioAutenticado(){
+    static obterUsuarioAutenticado(){
         return LocalStorageService.obterItem(USUARIO_LOGADO)
     }
 }

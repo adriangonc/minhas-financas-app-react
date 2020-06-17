@@ -1,13 +1,11 @@
 import React from 'react'
-
-import AuthService from '../app/service/authService'
+import AuthService from '../../src/app/service/authService'
 
 export const AuthContext = React.createContext()
-export const AuthConsumer = AuthContext.Consumer
-const AuthProvider = AuthContext.Provider
+export const AuthConsumer = AuthContext.Consumer;
+const AuthProvider = AuthContext.Provider;
 
-
-class ProvedorAutenticacao extends React.Component{
+class ProvedorAutenticacao extends React.Component {
 
     state = {
         usuarioAutenticado: null,
@@ -16,24 +14,25 @@ class ProvedorAutenticacao extends React.Component{
 
     iniciarSessao = (usuario) => {
         AuthService.logar(usuario)
-        this.setState({isAutenticado: true, usuarioAutenticado: usuario})
+        this.setState({ isAutenticado: true, usuarioAutenticado: usuario })
     }
 
     encerrarSessao = () => {
         AuthService.removerUsuarioAutenticado()
-        this.setState({isAutenticado: true, usuarioAutenticado: null})
+        this.setState({ isAutenticado: false, usuarioAutenticado: null })
     }
 
-    render(){
+    render() {
+
         const contexto = {
-            usuarioAutenticado: this.state.usuarioAutenticado,
             isAutenticado: this.state.isAutenticado,
+            usuarioAutenticado: this.state.usuarioAutenticado,
             iniciarSessao: this.iniciarSessao,
             encerrarSessao: this.encerrarSessao
         }
 
-        return(
-            <AuthProvider>
+        return (
+            <AuthProvider value={contexto}>
                 {this.props.children}
             </AuthProvider>
         )
