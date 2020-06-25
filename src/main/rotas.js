@@ -7,6 +7,7 @@ import ConsultaLancamentos from '../views/lancamentos/consultaLancamento'
 import CadastroLancamentos from '../views/lancamentos/cadastroLancamentos'
 import { AuthConsumer } from '../main/provedorAutenticacao'
 
+
 function RotaAutenticada( { component: Component, isUsuarioAutenticado, ...props } ){
     return(
         <Route {...props} render={ (componentProps) => {
