@@ -18,12 +18,15 @@ class CadastroLancamentos extends React.Component {
         tipo: null,
         status: '',
         usuario: null,
-        atualizando: false
+        atualizando: false,
+        anoAtual: new Date()
     }
 
     constructor(){
         super()
         this.service =  new LancamentoService()
+        this.state.ano = this.state.anoAtual.getFullYear();
+        this.state.mes = this.state.anoAtual.getMonth() + 1;
     }
 
     componentDidMount(){
