@@ -9,3 +9,16 @@ body{padding-top:120px}pre{background:#f7f7f9}@media (min-width: 768px){body>.na
    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
    filter: alpha(opacity=100) !important;
  }
+
+ #toast-container > .toast-info {
+    background-color: blue;
+  }
+  #toast-container > .toast-error {
+    background-color: red;
+  }
+  #toast-container > .toast-success {
+    background-color: green;
+  }
+  #toast-container > .toast-warning {
+    background-color: yellow;  
+  }
