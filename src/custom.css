@@ -2,3 +2,10 @@ body{padding-top:120px}pre{background:#f7f7f9}@media (min-width: 768px){body>.na
 .btn {
     margin-right: 5px;
 }
+
+
+#toast-container > div {
+    opacity: 1;
+   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+   filter: alpha(opacity=100) !important;
+ }
