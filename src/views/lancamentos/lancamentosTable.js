@@ -50,10 +50,10 @@ export default props => {
     } )
 
     return(
-        <table className="table table-hover">
+        <table className="tableLancamento table-hover" >
             <thead>
                 <tr>
-                    <th scope="col">Descrição</th>
+                    <th scope="col" className="colunDescription">Descrição</th>
                     <th scope="col">Valor</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Mês</th>

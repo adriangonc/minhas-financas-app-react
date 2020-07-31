@@ -176,7 +176,7 @@ class ConsultaLancamentos extends React.Component{
                 </div>
                 <br/>
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-12" >
                         <div className="bs-component">
                             <LacamentosTable lancamentos={this.state.lancamentos}
                                             deleteAction={this.abrirConfirmacao}

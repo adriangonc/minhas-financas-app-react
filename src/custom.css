@@ -22,3 +22,13 @@ body{padding-top:120px}pre{background:#f7f7f9}@media (min-width: 768px){body>.na
   #toast-container > .toast-warning {
     background-color: yellow;  
   }
+
+  .tableLancamento{
+    width: 800px;
+    margin-bottom: 1rem;
+    color: #212529;
+  }
+
+  .colunDescription{
+    width: 220px;
+  }
