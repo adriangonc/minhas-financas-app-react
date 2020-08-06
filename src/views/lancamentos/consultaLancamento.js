@@ -7,6 +7,7 @@ import LacamentosTable from './lancamentosTable'
 import LancamentoService from '../../app/service/lancamentoService'
 import LocalStorageService from '../../app/service/localstorageService'
 import * as messages from '../../components/toastr'
+import OrdenarValores from '../../components/ordenarValores'
 
 import {Dialog} from 'primereact/dialog'
 import {Button} from 'primereact/button';
@@ -54,10 +55,11 @@ class ConsultaLancamentos extends React.Component{
             if(lista.length === 0){
                 messages.mensagemAlerta("Nenhum resultado encontrado!")
             }
-            this.setState( { lancamentos: lista } )
+            this.setState( { lancamentos: lista.sort(OrdenarValores('mes', 'desc')) } )
         }).catch( error => {
             console.log(error)
         } )
+
     }
 
     editarLancamento = (id) => {
@@ -178,10 +180,12 @@ class ConsultaLancamentos extends React.Component{
                 <div className="row">
                     <div className="col-md-12" >
                         <div className="bs-component">
+                            
                             <LacamentosTable lancamentos={this.state.lancamentos}
                                             deleteAction={this.abrirConfirmacao}
                                             editAction={this.editarLancamento}
                                             alterarStatusLancamento={this.alterarStatusLancamento} />
+                            
                         </div>
                     </div>
                 </div>
