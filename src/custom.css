@@ -17,14 +17,14 @@ body{padding-top:120px}pre{background:#f7f7f9}@media (min-width: 768px){body>.na
     background-color: red;
   }
   #toast-container > .toast-success {
-    background-color: green;
+    background-color: lightskyblue;
   }
   #toast-container > .toast-warning {
-    background-color: yellow;  
+    background-color: lightyellow;  
   }
 
   .tableLancamento{
-    width: 580px;
+    width: 740px;
     margin-bottom: 1rem;
     color: #212529;
   }
@@ -33,6 +33,62 @@ body{padding-top:120px}pre{background:#f7f7f9}@media (min-width: 768px){body>.na
     width: 220px;
   }
 
-  tr:nth-child(even) {
+  .colunValue{
+    width: 90px;
+  }
+
+  .colunType{
+    width: 80px;
+  }
+
+  .colunMonth{
+    width: 60px;
+  }
+
+  .colunSituation{
+    width: 60px;
+  }
+
+  .trDefalt {
+    height: 50px;
+  }
+
+  /*tr:nth-child(even) {
     background-color: #f2f2f2;
+  }*/
+
+  .textCenter{
+    text-align: center;
+  }
+
+  .btn-danger-l{
+    color: red !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .btn-success-l{
+    color: green !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .btn-warning-l{
+    color: orange !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .btn-primary-l {
+    color: gray !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .btn-little{
+    font-size: 1em !important;
+  }
+
+  .bg-primary-orange {
+    background-color: #FD5B03 !important;
   }
