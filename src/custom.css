@@ -24,7 +24,7 @@ body{padding-top:0px}pre{background:#f7f7f9}@media (min-width: 768px){body>.navb
   }
 
   .tableLancamento{
-    width: 740px;
+    /*width: 95%;*/
     margin-bottom: 1rem;
     color: #212529;
   }
