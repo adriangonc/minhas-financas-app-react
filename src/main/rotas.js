@@ -6,6 +6,7 @@ import CadastroUsuario from '../views/cadastroUsuario'
 import ConsultaLancamentos from '../views/lancamentos/consultaLancamento'
 import CadastroLancamentos from '../views/lancamentos/cadastroLancamentos'
 import { AuthConsumer } from '../main/provedorAutenticacao'
+import ConsultaNotificacoes from '../views/notificacoes/consultaNotificacoes'
 
 
 function RotaAutenticada( { component: Component, isUsuarioAutenticado, ...props } ){
@@ -35,6 +36,7 @@ function Rotas(props){
                 <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/home" component={Home} />
                 <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/consulta-lancamentos" component={ConsultaLancamentos} />
                 <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/cadastro-lancamentos/:id?" component={CadastroLancamentos} />
+                <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/consulta-notificacoes" component={ConsultaNotificacoes} />
 
             </Switch>
         </HashRouter>
